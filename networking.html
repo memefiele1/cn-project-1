@@ -5,7 +5,7 @@
 </head>
 <body>
 
-    <h1>Networking Concepts Demonstrated</h1>
+    <h1>How Networking Makes This Website Work</h1>
 
     <nav>
         <a href="index.html">Home</a>
@@ -13,25 +13,29 @@
 
     <h2>1. DNS (Domain Name System)</h2>
     <p>
-        DNS translates a human-readable domain name into an IP address.
-        When a user enters a website URL, DNS resolves that name to the
-        server's IP address so the browser knows where to send the request.
+        When you type <strong>memefiele1.github.io/cn-project-1</strong> into a browser,
+        DNS translates that domain name into an IP address so your browser knows which
+        server to connect to. Running <code>nslookup memefiele1.github.io</code> returns
+        four IPv4 addresses: 185.199.108.153, 185.199.109.153, 185.199.110.153, and
+        185.199.111.153 — GitHub Pages uses multiple servers for load balancing.
     </p>
 
     <h2>2. IP Addressing</h2>
     <p>
-        Every website is hosted on a server with a unique IP address.
-        IPv4 addresses are 32-bit and look like 192.168.1.1.
-        IPv6 addresses are 128-bit and allow for many more devices
-        on the internet.
+        This site resolves to both IPv4 and IPv6 addresses. The IPv4 address
+        <strong>185.199.110.153</strong> is a 32-bit address in dotted-decimal format.
+        The IPv6 address <strong>2606:50c0:8001::153</strong> is a 128-bit address
+        supporting modern dual-stack networking. DNS returns A records for IPv4
+        and AAAA records for IPv6.
     </p>
 
     <h2>3. HTTP vs HTTPS</h2>
     <p>
-        HTTP is a protocol used for transferring web data.
-        HTTPS is the secure version of HTTP. It encrypts communication
-        using TLS over TCP/IP, protecting data between the browser
-        and the server.
+        This site is served exclusively over <strong>HTTPS</strong> on port 443,
+        confirmed by the browser lock icon and Chrome DevTools showing
+        <strong>Remote Address: 185.199.110.153:443</strong>. The status code returned
+        is <strong>304 Not Modified</strong>, meaning the browser cache was validated.
+        TLS encrypts all communication between your browser and GitHub's servers.
     </p>
 
 </body>
