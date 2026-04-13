@@ -1,42 +1,199 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <title>Networking Concepts</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://cdn.jsdelivr.net https://www.googletagmanager.com; style-src 'self' 'unsafe-inline'; img-src 'self' data: https:; connect-src https://www.google-analytics.com;">
+    <meta http-equiv="X-Content-Type-Options" content="nosniff">
+    <meta http-equiv="X-Frame-Options" content="DENY">
+    <meta http-equiv="Referrer-Policy" content="strict-origin-when-cross-origin">
+    <meta http-equiv="Cache-Control" content="max-age=86400">
+    <title>Networking Concepts — Project 1</title>
+    <style>
+        *{box-sizing:border-box;margin:0;padding:0}
+        body{font-family:Arial,sans-serif;max-width:860px;margin:0 auto;padding:2rem;background:#f9f9f9;color:#222}
+        h1{font-size:2rem;margin-bottom:.25rem}
+        h2{color:#0055aa;margin:0 0 .5rem}
+        nav{margin:1rem 0;padding:.75rem 1rem;background:#fff;border-radius:6px;box-shadow:0 1px 4px rgba(0,0,0,.1)}
+        nav a{color:#0066cc;text-decoration:none;margin-right:1rem;font-weight:bold}
+        nav a:hover{text-decoration:underline}
+        .card{background:#fff;border-radius:8px;padding:1.5rem;margin-top:1.5rem;box-shadow:0 1px 4px rgba(0,0,0,.1)}
+        code{background:#f0f0f0;padding:.15rem .4rem;border-radius:3px;font-size:.9rem}
+        .highlight{background:#e8f4fd;border-left:4px solid #0066cc;padding:.75rem 1rem;border-radius:0 6px 6px 0;margin-top:.75rem}
+        table{width:100%;border-collapse:collapse;margin-top:.75rem;font-size:.9rem}
+        th{background:#0055aa;color:#fff;padding:.5rem .75rem;text-align:left}
+        td{padding:.5rem .75rem;border-bottom:1px solid #eee}
+        tr:last-child td{border-bottom:none}
+        /* Lazy load fade-in */
+        img{opacity:0;transition:opacity .4s ease;border-radius:6px;max-width:100%;margin-top:.75rem}
+        img.loaded{opacity:1}
+        footer{margin-top:2rem;font-size:.85rem;color:#888;text-align:center}
+    </style>
 </head>
 <body>
 
+    <!-- Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-XXXXXXXXXX');
+    </script>
+
     <h1>How Networking Makes This Website Work</h1>
+    <p style="color:#555;margin-top:.25rem">Miracle Emefiele &mdash; CSC 4220, Spring 2026</p>
 
     <nav>
-        <a href="index.html">Home</a>
+        <a href="index.html">🏠 Home</a>
+        <a href="networking.html">📡 Networking Concepts</a>
     </nav>
 
-    <h2>1. DNS (Domain Name System)</h2>
-    <p>
-        When you type <strong>memefiele1.github.io/cn-project-1</strong> into a browser,
-        DNS translates that domain name into an IP address so your browser knows which
-        server to connect to. Running <code>nslookup memefiele1.github.io</code> returns
-        four IPv4 addresses: 185.199.108.153, 185.199.109.153, 185.199.110.153, and
-        185.199.111.153 — GitHub Pages uses multiple servers for load balancing.
-    </p>
+    <div class="card">
+        <h2>1. DNS (Domain Name System)</h2>
+        <p>
+            When you type <code>memefiele1.github.io/cn-project-1</code> into a browser,
+            DNS translates that domain name into an IP address so your browser knows which
+            server to connect to. Running <code>nslookup memefiele1.github.io</code> returns
+            four IPv4 addresses — GitHub Pages uses multiple servers for load balancing.
+        </p>
+        <div class="highlight">
+            <strong>DNS Records for memefiele1.github.io:</strong><br>
+            <code>185.199.108.153 &nbsp; 185.199.109.153</code><br>
+            <code>185.199.110.153 &nbsp; 185.199.111.153</code>
+        </div>
 
-    <h2>2. IP Addressing</h2>
-    <p>
-        This site resolves to both IPv4 and IPv6 addresses. The IPv4 address
-        <strong>185.199.110.153</strong> is a 32-bit address in dotted-decimal format.
-        The IPv6 address <strong>2606:50c0:8001::153</strong> is a 128-bit address
-        supporting modern dual-stack networking. DNS returns A records for IPv4
-        and AAAA records for IPv6.
-    </p>
+        <!-- Lazy loaded diagram -->
+        <img
+            data-src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a5/Example_of_an_internationalised_domain_name.svg/600px-Example_of_an_internationalised_domain_name.svg.png"
+            alt="DNS resolution diagram"
+            loading="lazy"
+            width="600"
+        >
+    </div>
 
-    <h2>3. HTTP vs HTTPS</h2>
-    <p>
-        This site is served exclusively over <strong>HTTPS</strong> on port 443,
-        confirmed by the browser lock icon and Chrome DevTools showing
-        <strong>Remote Address: 185.199.110.153:443</strong>. The status code returned
-        is <strong>304 Not Modified</strong>, meaning the browser cache was validated.
-        TLS encrypts all communication between your browser and GitHub's servers.
-    </p>
+    <div class="card">
+        <h2>2. IP Addressing</h2>
+        <p>
+            This site resolves to both IPv4 and IPv6 addresses. The IPv4 address
+            <strong>185.199.110.153</strong> is a 32-bit address in dotted-decimal format.
+            The IPv6 address <strong>2606:50c0:8001::153</strong> is a 128-bit address
+            supporting modern dual-stack networking.
+        </p>
+        <table>
+            <tr>
+                <th>Record Type</th>
+                <th>Address</th>
+                <th>Description</th>
+            </tr>
+            <tr>
+                <td><code>A</code></td>
+                <td><code>185.199.110.153</code></td>
+                <td>IPv4 — 32-bit dotted decimal</td>
+            </tr>
+            <tr>
+                <td><code>AAAA</code></td>
+                <td><code>2606:50c0:8001::153</code></td>
+                <td>IPv6 — 128-bit, dual-stack</td>
+            </tr>
+        </table>
+    </div>
+
+    <div class="card">
+        <h2>3. HTTP vs HTTPS</h2>
+        <p>
+            This site is served exclusively over <strong>HTTPS</strong> on port 443,
+            confirmed by the browser lock icon and Chrome DevTools showing
+            <strong>Remote Address: 185.199.110.153:443</strong>. The status code returned
+            is <strong>304 Not Modified</strong>, meaning the browser cache was validated.
+            TLS encrypts all communication between your browser and GitHub's servers.
+        </p>
+        <table>
+            <tr>
+                <th>Protocol</th>
+                <th>Port</th>
+                <th>Encrypted</th>
+                <th>Status</th>
+            </tr>
+            <tr>
+                <td>HTTP</td>
+                <td>80</td>
+                <td>❌ No</td>
+                <td>Redirects to HTTPS</td>
+            </tr>
+            <tr>
+                <td>HTTPS</td>
+                <td>443</td>
+                <td>✅ TLS</td>
+                <td>Active — 304 Not Modified</td>
+            </tr>
+        </table>
+    </div>
+
+    <div class="card">
+        <h2>4. Performance Optimizations Applied</h2>
+        <p>This page uses several networking-aware optimizations:</p>
+        <ul style="margin-top:.75rem;padding-left:1.25rem;line-height:2">
+            <li><strong>Lazy loading</strong> — images use <code>loading="lazy"</code> and fade in via IntersectionObserver, reducing initial page load bytes</li>
+            <li><strong>Cache-Control: max-age=86400</strong> — tells browsers to cache assets for 24 hours, cutting repeat-visit load time</li>
+            <li><strong>Minified CSS</strong> — styles inlined and compressed to reduce HTTP requests</li>
+            <li><strong>CDN delivery</strong> — GitHub Pages serves assets from a global CDN (Fastly) with edge caching</li>
+        </ul>
+    </div>
+
+    <div class="card">
+        <h2>5. Security Headers</h2>
+        <table>
+            <tr>
+                <th>Header</th>
+                <th>Value</th>
+                <th>Protection</th>
+            </tr>
+            <tr>
+                <td><code>Content-Security-Policy</code></td>
+                <td><code>default-src 'self'</code></td>
+                <td>Blocks unauthorized scripts/resources</td>
+            </tr>
+            <tr>
+                <td><code>X-Frame-Options</code></td>
+                <td><code>DENY</code></td>
+                <td>Prevents clickjacking</td>
+            </tr>
+            <tr>
+                <td><code>X-Content-Type-Options</code></td>
+                <td><code>nosniff</code></td>
+                <td>Stops MIME sniffing attacks</td>
+            </tr>
+            <tr>
+                <td><code>Referrer-Policy</code></td>
+                <td><code>strict-origin</code></td>
+                <td>Limits referrer data leakage</td>
+            </tr>
+        </table>
+    </div>
+
+    <!-- Lazy load script -->
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            const lazyImages = document.querySelectorAll("img[data-src]");
+            const observer = new IntersectionObserver(function(entries) {
+                entries.forEach(function(entry) {
+                    if (entry.isIntersecting) {
+                        const img = entry.target;
+                        img.src = img.dataset.src;
+                        img.onload = function() { img.classList.add("loaded"); };
+                        observer.unobserve(img);
+                    }
+                });
+            });
+            lazyImages.forEach(function(img) { observer.observe(img); });
+        });
+    </script>
+
+    <footer>
+        <p>CSC 4220 Computer Networking &mdash; Georgia State University &mdash; Spring 2026</p>
+        <p style="margin-top:.25rem">Hosted on <a href="https://pages.github.com" style="color:#0066cc">GitHub Pages</a> with HTTPS</p>
+    </footer>
 
 </body>
 </html>
