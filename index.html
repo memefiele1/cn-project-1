@@ -52,47 +52,47 @@
     <div class="card">
         <h2>About This Project</h2>
         <p style="margin-top:.5rem">
-            This website demonstrates how core networking concepts — DNS, IP addressing,
-            and HTTPS — are applied in a real-world web deployment on GitHub Pages.
+            This website shows how core networking concepts like DNS, IP addressing, and HTTPS
+            actually work in a real web deployment on GitHub Pages.
         </p>
     </div>
 
     <div class="card">
         <h2>Security Features Implemented</h2>
         <ul class="security-list">
-            <li><strong>HTTPS via GitHub Pages</strong> — all traffic encrypted over TLS on port 443</li>
-            <li><strong>Content Security Policy (CSP)</strong> — restricts which scripts and resources can load</li>
-            <li><strong>XSS Protection</strong> — DOMPurify sanitizes any dynamic user input</li>
-            <li><strong>X-Frame-Options: DENY</strong> — prevents clickjacking attacks</li>
+            <li><strong>HTTPS via GitHub Pages</strong> — all traffic is encrypted over TLS on port 443</li>
+            <li><strong>Content Security Policy (CSP)</strong> — controls which scripts and resources are allowed to load</li>
+            <li><strong>XSS Protection</strong> — DOMPurify sanitizes any dynamic user input before it hits the DOM</li>
+            <li><strong>X-Frame-Options: DENY</strong> — blocks the site from being embedded in an iframe</li>
             <li><strong>X-Content-Type-Options: nosniff</strong> — stops MIME-type sniffing</li>
-            <li><strong>Referrer-Policy</strong> — limits referrer data sent to third parties</li>
+            <li><strong>Referrer-Policy</strong> — limits how much referrer data gets sent to third parties</li>
         </ul>
     </div>
 
     <div class="card">
         <h2>Performance Optimizations</h2>
         <ul class="security-list">
-            <li><strong>Minified CSS</strong> — styles inlined and condensed to reduce HTTP requests</li>
-            <li><strong>Lazy loading</strong> — images load only when visible in the viewport</li>
-            <li><strong>Cache-Control headers</strong> — assets cached for 24 hours (86400 seconds)</li>
-            <li><strong>Automated deployment</strong> — GitHub Actions CI/CD pipeline on every push</li>
+            <li><strong>Minified CSS</strong> — styles are inlined and condensed to cut down on HTTP requests</li>
+            <li><strong>Lazy loading</strong> — images only load once they scroll into view</li>
+            <li><strong>Cache-Control headers</strong> — assets are cached for 24 hours (86400 seconds)</li>
+            <li><strong>Automated deployment</strong> — GitHub Actions CI/CD pipeline runs on every push</li>
         </ul>
     </div>
 
     <div class="card">
         <h2>XSS Protection Demo</h2>
         <p style="margin-top:.5rem;margin-bottom:.75rem">
-            Any input rendered to the page is sanitized using DOMPurify before display.
+            Any input rendered to the page goes through DOMPurify before it gets displayed.
             Try typing something below — malicious scripts will be stripped automatically.
         </p>
-        <input type="text" id="userInput" placeholder="Type something..." 
+        <input type="text" id="userInput" placeholder="Type something..."
                style="padding:.5rem;width:100%;border:1px solid #ccc;border-radius:4px;font-size:1rem">
         <div id="output" style="margin-top:.75rem;padding:.75rem;background:#f0f0f0;border-radius:4px;min-height:2rem;font-size:.95rem"></div>
         <script>
             document.getElementById('userInput').addEventListener('input', function() {
                 const clean = DOMPurify.sanitize(this.value);
-                document.getElementById('output').textContent = clean 
-                    ? 'Sanitized output: ' + clean 
+                document.getElementById('output').textContent = clean
+                    ? 'Sanitized output: ' + clean
                     : '';
             });
         </script>
