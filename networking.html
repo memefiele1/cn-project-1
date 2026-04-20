@@ -24,7 +24,6 @@
         th{background:#0055aa;color:#fff;padding:.5rem .75rem;text-align:left}
         td{padding:.5rem .75rem;border-bottom:1px solid #eee}
         tr:last-child td{border-bottom:none}
-        /* Lazy load fade-in */
         img{opacity:0;transition:opacity .4s ease;border-radius:6px;max-width:100%;margin-top:.75rem}
         img.loaded{opacity:1}
         footer{margin-top:2rem;font-size:.85rem;color:#888;text-align:center}
@@ -53,9 +52,9 @@
         <h2>1. DNS (Domain Name System)</h2>
         <p>
             When you type <code>memefiele1.github.io/cn-project-1</code> into a browser,
-            DNS translates that domain name into an IP address so your browser knows which
+            DNS translates that domain name into an IP address so the browser knows which
             server to connect to. Running <code>nslookup memefiele1.github.io</code> returns
-            four IPv4 addresses — GitHub Pages uses multiple servers for load balancing.
+            four IPv4 addresses because GitHub Pages uses multiple servers for load balancing.
         </p>
         <div class="highlight">
             <strong>DNS Records for memefiele1.github.io:</strong><br>
@@ -63,7 +62,6 @@
             <code>185.199.110.153 &nbsp; 185.199.111.153</code>
         </div>
 
-        <!-- Lazy loaded diagram -->
         <img
             data-src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a5/Example_of_an_internationalised_domain_name.svg/600px-Example_of_an_internationalised_domain_name.svg.png"
             alt="DNS resolution diagram"
@@ -78,7 +76,7 @@
             This site resolves to both IPv4 and IPv6 addresses. The IPv4 address
             <strong>185.199.110.153</strong> is a 32-bit address in dotted-decimal format.
             The IPv6 address <strong>2606:50c0:8001::153</strong> is a 128-bit address
-            supporting modern dual-stack networking.
+            that supports modern dual-stack networking.
         </p>
         <table>
             <tr>
@@ -89,12 +87,12 @@
             <tr>
                 <td><code>A</code></td>
                 <td><code>185.199.110.153</code></td>
-                <td>IPv4 — 32-bit dotted decimal</td>
+                <td>IPv4, 32-bit dotted decimal</td>
             </tr>
             <tr>
                 <td><code>AAAA</code></td>
                 <td><code>2606:50c0:8001::153</code></td>
-                <td>IPv6 — 128-bit, dual-stack</td>
+                <td>IPv6, 128-bit dual-stack</td>
             </tr>
         </table>
     </div>
@@ -102,11 +100,12 @@
     <div class="card">
         <h2>3. HTTP vs HTTPS</h2>
         <p>
-            This site is served exclusively over <strong>HTTPS</strong> on port 443,
-            confirmed by the browser lock icon and Chrome DevTools showing
-            <strong>Remote Address: 185.199.110.153:443</strong>. The status code returned
-            is <strong>304 Not Modified</strong>, meaning the browser cache was validated.
-            TLS encrypts all communication between your browser and GitHub's servers.
+            This site is served over <strong>HTTPS</strong> on port 443.
+            You can confirm it in Chrome DevTools, which shows
+            <strong>Remote Address: 185.199.110.153:443</strong> and a status of
+            <strong>304 Not Modified</strong> on repeat visits, meaning the browser
+            pulled from cache. TLS encrypts everything going between your browser
+            and GitHub's servers.
         </p>
         <table>
             <tr>
@@ -125,19 +124,19 @@
                 <td>HTTPS</td>
                 <td>443</td>
                 <td>✅ TLS</td>
-                <td>Active — 304 Not Modified</td>
+                <td>Active, 304 Not Modified</td>
             </tr>
         </table>
     </div>
 
     <div class="card">
         <h2>4. Performance Optimizations Applied</h2>
-        <p>This page uses several networking-aware optimizations:</p>
+        <p>A few networking-aware optimizations are running on this page:</p>
         <ul style="margin-top:.75rem;padding-left:1.25rem;line-height:2">
-            <li><strong>Lazy loading</strong> — images use <code>loading="lazy"</code> and fade in via IntersectionObserver, reducing initial page load bytes</li>
-            <li><strong>Cache-Control: max-age=86400</strong> — tells browsers to cache assets for 24 hours, cutting repeat-visit load time</li>
-            <li><strong>Minified CSS</strong> — styles inlined and compressed to reduce HTTP requests</li>
-            <li><strong>CDN delivery</strong> — GitHub Pages serves assets from a global CDN (Fastly) with edge caching</li>
+            <li><strong>Lazy loading</strong> — images use <code>loading="lazy"</code> and an IntersectionObserver so they only load when scrolled into view, which cuts down the initial page load</li>
+            <li><strong>Cache-Control: max-age=86400</strong> — tells browsers to cache assets for 24 hours so repeat visits are faster</li>
+            <li><strong>Minified CSS</strong> — styles are inlined and compressed to avoid extra HTTP requests</li>
+            <li><strong>CDN delivery</strong> — GitHub Pages serves everything through Fastly's global CDN with edge caching</li>
         </ul>
     </div>
 
@@ -147,17 +146,17 @@
             <tr>
                 <th>Header</th>
                 <th>Value</th>
-                <th>Protection</th>
+                <th>What it does</th>
             </tr>
             <tr>
                 <td><code>Content-Security-Policy</code></td>
                 <td><code>default-src 'self'</code></td>
-                <td>Blocks unauthorized scripts/resources</td>
+                <td>Blocks scripts and resources from unauthorized sources</td>
             </tr>
             <tr>
                 <td><code>X-Frame-Options</code></td>
                 <td><code>DENY</code></td>
-                <td>Prevents clickjacking</td>
+                <td>Blocks the site from being loaded in an iframe</td>
             </tr>
             <tr>
                 <td><code>X-Content-Type-Options</code></td>
@@ -167,7 +166,7 @@
             <tr>
                 <td><code>Referrer-Policy</code></td>
                 <td><code>strict-origin</code></td>
-                <td>Limits referrer data leakage</td>
+                <td>Limits referrer data sent to other sites</td>
             </tr>
         </table>
     </div>
